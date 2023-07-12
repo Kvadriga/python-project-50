@@ -17,8 +17,24 @@ def main():
         file1 = json.loads(handle.read())
     with open(args.second_file) as handle:
         file2 = json.loads(handle.read())
-    print('\nstart\n')
-    print(file1, file2)
+    
+    result = '{\n'
+
+    for i in sorted(file1.keys()|file2.keys()):
+        if i in file1.keys():
+            if i in file2.keys():
+                if file1[i] == file2[i]:
+                    result = result + '   ' + i + ': ' + str(file1[i]) + '\n'
+                else:
+                    result = result + ' - ' + i + ': ' + str(file1[i]) + '\n'
+                    result = result + ' + ' + i + ': ' + str(file2[i]) + '\n'
+            else:
+                result = result + ' - ' + i + ': ' + str(file1[i]) + '\n'
+        else:
+            result = result + ' + ' + i + ': ' + str(file2[i]) + '\n'
+    result = result + '}'
+
+    return result
 
 
 
