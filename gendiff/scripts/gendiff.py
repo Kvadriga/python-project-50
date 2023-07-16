@@ -12,15 +12,16 @@ parser.add_argument('second_file')
 
 args = parser.parse_args()
 
-def main():
+
+def generate_diff():
     with open(args.first_file) as handle:
         file1 = json.loads(handle.read())
     with open(args.second_file) as handle:
         file2 = json.loads(handle.read())
-    
+
     result = '{\n'
 
-    for i in sorted(file1.keys()|file2.keys()):
+    for i in sorted(file1.keys() | file2.keys()):
         if i in file1.keys():
             if i in file2.keys():
                 if file1[i] == file2[i]:
@@ -35,6 +36,3 @@ def main():
     result = result + '}'
 
     return result
-
-
-
