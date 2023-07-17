@@ -14,10 +14,9 @@ args = parser.parse_args()
 
 
 def generate_diff():
-    with open(args.first_file) as handle:
+    with open(args.first_file) as handle, open(args.second_file) as handle2:
         file1 = json.loads(handle.read())
-    with open(args.second_file) as handle:
-        file2 = json.loads(handle.read())
+        file2 = json.loads(handle2.read())
 
     result = '{\n'
 
